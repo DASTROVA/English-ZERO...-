@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102b79">
+  <meta name="description" content="ENGLISH ZERO — fun English learning for Grade 1">
+  <title>ENGLISH ZERO | Kids Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="#" onclick="showHome();return false;">
+      <span class="brand-icon">E</span>
+      <span>ENGLISH <b>ZERO</b><small>LEARN • PLAY • GROW</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="grade-pill">⭐ GRADE 1</span>
+      <button class="sound-button" id="soundToggle" aria-label="Toggle sound">🔊</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="welcomeScreen" class="welcome-screen">
+      <div class="welcome-decoration decoration-one">🌟</div>
+      <div class="welcome-decoration decoration-two">📚</div>
+      <div class="welcome-decoration decoration-three">🦋</div>
+      <div class="welcome-card">
+        <div class="welcome-logo">🎓</div>
+        <p class="eyebrow">WELCOME TO</p>
+        <h1>ENGLISH <span>ZERO</span></h1>
+        <p class="welcome-description">Learn English with fun, pictures and games!</p>
+        <label for="studentName">What is your name?</label>
+        <input id="studentName" maxlength="24" placeholder="Enter your first name" autocomplete="given-name">
+        <button class="primary-button full-button" id="startButton">LET'S START 🚀</button>
+        <p class="welcome-small">A happy place to learn English 💜</p>
+      </div>
+    </section>
+
+    <section id="homeScreen" class="hidden">
+      <div class="hero">
+        <div class="hero-content">
+          <span class="hero-label">✨ YOUR ENGLISH ADVENTURE</span>
+          <h1>Hello, <span id="displayName">Friend</span>!</h1>
+          <p>Are you ready to learn something new today?</p>
+          <button class="hero-button" onclick="document.getElementById('topicsSection').scrollIntoView({behavior:'smooth'})">Explore lessons →</button>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-circle">📖</div>
+          <span class="hero-float float-a">⭐</span>
+          <span class="hero-float float-b">🧸</span>
+          <span class="hero-float float-c">🌈</span>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><span>⭐</span><div><strong id="totalStars">0</strong><small>Stars earned</small></div></div>
+        <div class="stat-card"><span>🏆</span><div><strong id="completedTests">0</strong><small>Tests completed</small></div></div>
+        <div class="stat-card"><span>🎯</span><div><strong id="bestScore">0%</strong><small>Best result</small></div></div>
+      </div>
+
+      <section id="topicsSection">
+        <div class="section-heading">
+          <div><p class="eyebrow dark-eyebrow">LET'S LEARN</p><h2>Choose your lesson</h2></div>
+          <span class="heading-emoji">🎨</span>
+        </div>
+        <div class="topic-grid" id="topicGrid"></div>
+      </section>
+
+      <section class="progress-card">
+        <div><span class="progress-icon">🌱</span><div><h3>Your learning journey</h3><p>Every little step makes you better!</p></div></div>
+        <div class="journey-track"><div id="journeyProgress"></div></div>
+        <small id="journeyText">Complete a lesson to start your journey.</small>
+      </section>
+
+      <section class="history-section">
+        <div class="section-heading"><div><p class="eyebrow dark-eyebrow">YOUR ACTIVITY</p><h2>Recent results</h2></div></div>
+        <div id="historyList" class="history-list"><p class="empty-state">Your completed tests will appear here. 🌟</p></div>
+      </section>
+    </section>
+
+    <section id="lessonScreen" class="hidden">
+      <button class="back-button" onclick="showHome()">← Back to lessons</button>
+      <div class="lesson-banner">
+        <div><span class="eyebrow dark-eyebrow">LET'S PRACTICE</span><h1 id="lessonTitle">Wild Animals</h1><p id="lessonDescription">Meet amazing animals!</p></div>
+        <div class="lesson-emoji" id="lessonEmoji">🦁</div>
+      </div>
+
+      <div class="difficulty-card">
+        <h2>Choose your level</h2>
+        <p>Start easy and become an English star!</p>
+        <div class="difficulty-options">
+          <button class="difficulty-button selected" data-level="easy"><span>🌱</span><b>Easy</b><small>Let's start!</small></button>
+          <button class="difficulty-button" data-level="medium"><span>🚀</span><b>Medium</b><small>Keep going!</small></button>
+          <button class="difficulty-button" data-level="hard"><span>🏆</span><b>Hard</b><small>Challenge time!</small></button>
+        </div>
+        <button class="primary-button full-button" id="beginQuiz">START QUIZ ✨</button>
+      </div>
+    </section>
+
+    <section id="quizScreen" class="hidden">
+      <div class="quiz-top">
+        <button class="back-button" onclick="confirmExit()">✕ Exit</button>
+        <span class="quiz-level" id="quizLevel">🌱 EASY</span>
+        <span class="quiz-score">⭐ <b id="liveScore">0</b></span>
+      </div>
+      <div class="quiz-progress"><div id="quizProgress"></div></div>
+      <div class="quiz-meta"><span id="questionCounter">Question 1 / 10</span><span id="questionPercent">0%</span></div>
+
+      <div class="question-card">
+        <p class="question-label">LOOK, THINK & CHOOSE!</p>
+        <div class="question-picture" id="questionPicture"></div>
+        <h2 id="questionText">What animal is this?</h2>
+        <p class="question-hint" id="questionHint">Choose the correct answer.</p>
+        <div class="answer-grid" id="answerGrid"></div>
+        <div id="answerFeedback" class="answer-feedback" aria-live="polite"></div>
+        <button class="primary-button full-button hidden" id="nextQuestion">NEXT QUESTION →</button>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="hidden">
+      <div class="result-card">
+        <div class="result-confetti">🎉 ⭐ 🎊</div>
+        <div class="result-trophy" id="resultTrophy">🏆</div>
+        <p class="eyebrow dark-eyebrow">QUIZ COMPLETED</p>
+        <h1 id="resultTitle">Amazing work!</h1>
+        <p id="resultMessage">You did a great job!</p>
+        <div class="result-score"><strong id="finalPercent">100%</strong><span>Your score</span></div>
+        <div class="result-stats">
+          <div><b id="correctCount">0</b><small>Correct</small></div>
+          <div><b id="wrongCount">0</b><small>Incorrect</small></div>
+          <div><b id="earnedStars">0</b><small>Stars ⭐</small></div>
+        </div>
+        <button class="primary-button full-button" onclick="showHome()">BACK TO HOME 🏠</button>
+        <button class="secondary-button full-button" id="retryButton">TRY AGAIN 🔄</button>
+        <button class="text-button" id="reviewButton">Review my answers</button>
+      </div>
+      <div id="reviewArea" class="review-area hidden"></div>
+    </section>
+
+   <footer class="site-footer">
+  <p>© 2026 ENGLISH ZERO. All rights reserved.</p>
+  <p><strong>Site Owner:</strong> DASTROVA STUDIO (@DASTROVA)</p>
+  <p><strong>Teacher:</strong> KOBILOVA RAVSHANOY</p>
+</footer>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
